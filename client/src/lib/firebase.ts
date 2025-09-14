@@ -5,7 +5,7 @@ const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: `${import.meta.env.VITE_FIREBASE_PROJECT_ID}.firebaseapp.com`,
   projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: `${import.meta.env.VITE_FIREBASE_PROJECT_ID}.appspot.com`,
+  storageBucket: `${import.meta.env.VITE_FIREBASE_PROJECT_ID}.firebasestorage.app`,
   appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
@@ -25,6 +25,11 @@ try {
     console.log("Firebase initialized successfully");
   } else {
     console.warn("Firebase configuration is incomplete. Authentication features will be disabled.");
+    console.warn("Missing Firebase config values:", {
+      apiKey: !firebaseConfig.apiKey ? "VITE_FIREBASE_API_KEY" : "✓",
+      projectId: !firebaseConfig.projectId ? "VITE_FIREBASE_PROJECT_ID" : "✓", 
+      appId: !firebaseConfig.appId ? "VITE_FIREBASE_APP_ID" : "✓"
+    });
   }
 } catch (error) {
   console.error("Firebase initialization failed:", error);
